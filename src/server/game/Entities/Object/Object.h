@@ -328,7 +328,6 @@ public:
     DataMap CustomData;
 
 protected:
-
     Object();
 
     void _InitValues();
@@ -485,7 +484,6 @@ struct Position
 
     [[nodiscard]] Position GetPosition() const { return *this; }
 
-
     Position::PositionXYZStreamer PositionXYZStream()
     {
         return PositionXYZStreamer(*this);
@@ -593,7 +591,6 @@ ByteBuffer& operator >> (ByteBuffer& buf, Position::PositionXYZStreamer const& s
 ByteBuffer& operator<<(ByteBuffer& buf, Position::PositionXYZOStreamer const& streamer);
 ByteBuffer& operator >> (ByteBuffer& buf, Position::PositionXYZOStreamer const& streamer);
 
-
 struct MovementInfo
 {
     // common
@@ -637,7 +634,6 @@ struct MovementInfo
         }
 
         float zspeed, sinAngle, cosAngle, xyspeed;
-
     } jump;
 
     // spline
@@ -796,10 +792,7 @@ public:
         GetPosition(&pos);
         MovePosition(pos, dist, angle);
     }
-    bool MovePositionToFirstCollision(Position& pos, float dist, float angle);
-    Position GetFirstCollisionPosition(float startX, float startY, float startZ, float destX, float destY);
-    Position GetFirstCollisionPosition(float destX, float destY, float destZ);
-    Position GetFirstCollisionPosition(float dist, float angle);
+    void MovePositionToFirstCollision(Position& pos, float dist, float angle);
     void GetFirstCollisionPosition(Position& pos, float dist, float angle)
     {
         GetPosition(&pos);
@@ -1063,9 +1056,6 @@ public:
     [[nodiscard]] virtual float GetStationaryY() const { return GetPositionY(); }
     [[nodiscard]] virtual float GetStationaryZ() const { return GetPositionZ(); }
     [[nodiscard]] virtual float GetStationaryO() const { return GetOrientation(); }
-    float GetMapHeight(float x, float y, float z, bool vmap = true, float distanceToSearch = 50.0f) const; // DEFAULT_HEIGHT_SEARCH in map.h
-
-    virtual float GetCollisionHeight() const { return 0.0f; }
 
 protected:
     std::string m_name;
